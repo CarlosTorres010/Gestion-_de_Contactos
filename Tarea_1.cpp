@@ -30,11 +30,10 @@ struct contactoEmail{
 void agregarContactos(contactoEmail contactos[], int & cantidadContactos){
 	if(cantidadContactos >= limite_contactos){
 		cout<<"Ya no queda espacio sufieciwente para agregar otro contacto.	 "; 
-
 		return; 
 	}
 contactoEmail cont;
-	cout<<"Digite sus nombres completos: "; 
+	cout<<"Ingrese sus nombres completos: "; 
  	cin.ignore(); 
  	getline(cin,cont.nombrescompletos);  
  	cout<<"Ingrese su sexo: "; 
@@ -48,14 +47,26 @@ contactoEmail cont;
  	cout<<"Ingrese su nacionalidad: "; 
  	cin>>cont.nacionalidad ; 
  	cout<<"\n"; 
- 	cout<<"Contacto guardado!\n"; 
+ 	cout<<"Contacto guardado "<<endl;
 
  }
  
-// void eliminarcontacto
+void eliminarcontactos(contactoEmail contactos[], int &cantidadContactos, int indice){
+	if(indice>=0 && indice < limite_contactos){
+		for(int i=indice; i< cantidadContactos -1; i++){
+			contactos[i] = contactos [i+1];
+		}
+		cantidadContactos--;
+		cout << "\nContacto eliminado"<< endl;
+	} else {
+		cout << "\nIndice no valido" << endl;
+	}
+}
 
 int main(){
 	int opcion;
+	contactoEmail contactos[limite_contactos];
+	int cantidadContactos=0;
 
 	contactoEmail cont;
 
@@ -70,29 +81,15 @@ int main(){
 		   	cout<<endl<<"Digite el numero de la opcion: "<<endl;
   	   		cin>>opcion;
 
-  	   	switch(opcion){
-  			     case 1: 
-   			  	 cout<<"Ingrese sus nombres completos: "; 
-   			  	 cin.ignore(); 
-   			  	 getline(cin,cont.nombrescompletos);  
-   			  	 cout<<"Ingrese su sexo: "; 
-   			  	 getline(cin, cont.sexo); 
-   			  	 cout<<"Ingrese su edad: "; 
-   			  	 cin>>cont.edad; 
-   			  	 cout<<"Ingrese su telefono: "; 
-   			  	 cin>>cont.telefono; 
-				 cout<<"Ingrese su email: "; 
-				 cin>>cont.email;  
-				 cout<<"Ingrese su nacionalidad: "; 
-				 cin>>cont.nacionalidad ; 
-				 cout<<"\n"; 
-
-				 cout<<"\nNombres completos:"<<cont.nombrescompletos<<endl;  
-				 cout<<"Sexo: "<<cont.sexo<<endl; 
-				 cout<<"Edad: "<<cont.edad<<endl; 
-				 cout<<"Telefono: "<<cont.telefono<<endl; 
-				 cout<<"Email: "<<cont.email<<endl; 
-				 cout<<"Nacionalidad: "<<cont.nacionalidad<<endl; 
+  	   	switch (opcion) {
+				case 1: 
+   			  	 	agregarContactos(contactos, cantidadContactos);
+					break;
+				case 2:
+					int indice;
+					cout << "Ingrese indice del contacto a eliminar, Comenzar del 0" << endl;
+					cin >> indice;
+					eliminarcontactos(contactos, cantidadContactos, indice);
 
 				 default : break;  
   	   		}
