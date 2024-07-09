@@ -15,7 +15,8 @@ mismo.
 #include <iostream>
 #include <string>
 
-using namespace std; 
+using namespace std;
+const int limite_contactos = 50;  
 
 struct contactoEmail{
 	string 	nombrescompletos; 
@@ -25,6 +26,33 @@ struct contactoEmail{
 	string 	email; 
 	string 	nacionalidad; 
 };
+
+void agregarContactos(contactoEmail contactos[], int & cantidadContactos){
+	if(cantidadContactos >= limite_contactos){
+		cout<<"Ya no queda espacio sufieciwente para agregar otro contacto.	 "; 
+
+		return; 
+	}
+contactoEmail cont;
+	cout<<"Digite sus nombres completos: "; 
+ 	cin.ignore(); 
+ 	getline(cin,cont.nombrescompletos);  
+ 	cout<<"Ingrese su sexo: "; 
+ 	getline(cin, cont.sexo); 
+ 	cout<<"Ingrese su edad: "; 
+ 	cin>>cont.edad; 
+ 	cout<<"Ingrese su telefono: "; 
+ 	cin>>cont.telefono; 
+ 	cout<<"Ingrese su email: "; 
+ 	cin>>cont.email;  
+ 	cout<<"Ingrese su nacionalidad: "; 
+ 	cin>>cont.nacionalidad ; 
+ 	cout<<"\n"; 
+ 	cout<<"Contacto guardado!\n"; 
+
+ }
+ 
+// void eliminarcontacto
 
 int main(){
 	int opcion;
