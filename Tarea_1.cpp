@@ -83,6 +83,36 @@ void mostrarContactos(contactoEmail contactos[], int cantidadContactos){
 	}
 }
 
+string obtenerDominio(const string& email){
+    int buscarroba=-1;
+    for (int i=0;i<email.length();++i){
+        if(email[i]=='@') {
+            buscarroba=i;
+            break;
+        }
+    }
+    if(buscarroba == -1){
+        return "";
+    }
+    string dominio = "";
+    for(int i = buscarroba + 1; i<email.length();++i){
+        dominio+=email[i];
+    }
+    return dominio;
+}
+
+void enumerarContactos(contactoEmail contactos[], int cantidadContactos) {
+    for (int i = 0; i<cantidadContactos - 1; ++i) {
+        for (int j = 0; j<cantidadContactos - 1 - i; ++j) {
+            if (obtenerDominio(contactos[j].email)>obtenerDominio(contactos[j + 1].email)){
+                contactoEmail temp =contactos[j];
+                contactos[j]=contactos[j + 1];
+                contactos[j+1]=temp;
+            }
+        }
+    }
+}
+
 int main(){
 	int opcion;
 	contactoEmail contactos[limite_contactos];
@@ -114,7 +144,17 @@ int main(){
 				case 3:
 				    mostrarContactos(contactos, cantidadContactos);  
 				    break;
-
+				case 4: 
+                    if(cantidadContactos == 0){
+					cout<<"\nNingun contacto por mostrar. "<<endl;
+					}
+     	            cout<<"\nMOSTRANDO CONTACTOS SEGUN EL ORDEN POR SERVIDOR: \n"; 
+     	            
+					enumerarContactos(contactos, cantidadContactos); 
+                    mostrarContactos(contactos, cantidadContactos); 
+   	  			    break; 
+                case 5: 
+   	 	            cout<<"Saliendo del programa..."<<endl;
 				 default : break;  
   	   		}
 
