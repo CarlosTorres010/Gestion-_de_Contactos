@@ -48,6 +48,8 @@ contactoEmail cont;
  	cin>>cont.nacionalidad ; 
  	cout<<"\n"; 
  	cout<<"Contacto guardado "<<endl;
+	contactos[cantidadContactos] = cont;
+	cantidadContactos++;
 
  }
  
@@ -60,6 +62,24 @@ void eliminarcontactos(contactoEmail contactos[], int &cantidadContactos, int in
 		cout << "\nContacto eliminado"<< endl;
 	} else {
 		cout << "\nIndice no valido" << endl;
+	}
+}
+
+void mostrarContactos(contactoEmail contactos[], int cantidadContactos){
+	if(cantidadContactos == 0){
+		cout<<"\nNingun contacto por mostrar. "<<endl;
+	}
+	else{
+	   for(int i=0; i<cantidadContactos; ++i){
+	   	cout<<"Contacto: "<<i+1<<" | "<<" -> "<<"INDICE: "<< i <<endl; 
+	   	cout<<"Nombres completos: "<<contactos[i].nombrescompletos<<endl;
+	   	cout<<"Sexo: "<<contactos[i].sexo<<endl; 
+	   	cout<<"Edad: "<<contactos[i].edad<<endl; 
+	   	cout<<"Telefono: "<<contactos[i].telefono<<endl; 
+	   	cout<<"Email: "<<contactos[i].email<<endl; 
+	   	cout<<"Nacionalidad: "<<contactos[i].nacionalidad<<endl; 
+	   	cout<<"\n"; 
+	   }
 	}
 }
 
@@ -90,6 +110,10 @@ int main(){
 					cout << "Ingrese indice del contacto a eliminar, Comenzar del 0" << endl;
 					cin >> indice;
 					eliminarcontactos(contactos, cantidadContactos, indice);
+					break;
+				case 3:
+				    mostrarContactos(contactos, cantidadContactos);  
+				    break;
 
 				 default : break;  
   	   		}
